@@ -16,118 +16,124 @@ export function SiteHeader({ categories }: { categories: NavCategory[] }) {
   const [collectionsOpen, setCollectionsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50">
-      <div className="bg-[var(--announcement)] px-4 py-2.5 text-center text-[0.68rem] font-medium tracking-[0.18em] text-[#f7f2ee] uppercase">
+    <header>
+      <div className="bg-slate-900 px-4 py-2 text-center text-xs font-medium tracking-wide text-white">
         Formals &amp; Bridals — Request a personal quote
       </div>
-      <div className="border-b border-[var(--border)] bg-[rgba(255,252,250,0.78)] backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 md:py-5">
-          <button
-            type="button"
-            className="relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-[var(--radius-md)] bg-[var(--surface)] lg:hidden"
-            aria-label="Open menu"
-            onClick={() => setOpen(true)}
-          >
-            <span className="block h-0.5 w-4 rounded-full bg-[var(--foreground)]" />
-            <span className="block h-0.5 w-4 rounded-full bg-[var(--foreground)]" />
-            <span className="block h-0.5 w-4 rounded-full bg-[var(--foreground)]" />
-          </button>
+      <nav className="sticky top-0 z-50 border-b border-slate-100 bg-white/90 backdrop-blur-md">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex flex-shrink-0 items-center">
+              <Link href="/" className="brand-mark text-2xl tracking-tight text-slate-900">
+                Mina Hasan
+                <span className="text-[var(--brand)]">.</span>
+              </Link>
+            </div>
 
-          <nav className="hidden items-center gap-8 lg:flex">
-            <Link href="/" className="nav-link">
-              Home
-            </Link>
-            <div className="relative">
-              <button
-                type="button"
-                className="nav-link"
-                onMouseEnter={() => setCollectionsOpen(true)}
-                onClick={() => setCollectionsOpen((v) => !v)}
-              >
-                Collections
-              </button>
-              {collectionsOpen && (
-                <div
-                  className="absolute left-0 top-full z-50 mt-4 min-w-64 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface-elevated)] p-5 shadow-[var(--shadow-lift)]"
-                  onMouseLeave={() => setCollectionsOpen(false)}
+            <div className="hidden items-center space-x-8 md:flex">
+              <Link href="/" className="nav-link !text-slate-900">
+                Home
+              </Link>
+              <div className="relative">
+                <button
+                  type="button"
+                  className="nav-link"
+                  onMouseEnter={() => setCollectionsOpen(true)}
+                  onClick={() => setCollectionsOpen((v) => !v)}
                 >
-                  {categories.map((cat) => (
-                    <div key={cat.id} className="mb-3 last:mb-0">
-                      <Link
-                        href={`/collections/${cat.slug}`}
-                        className="block font-serif text-xl text-[var(--foreground)] transition hover:text-[var(--brand)]"
-                        onClick={() => setCollectionsOpen(false)}
-                      >
-                        {cat.name}
-                      </Link>
-                      {cat.children.map((child) => (
+                  Collections
+                </button>
+                {collectionsOpen && (
+                  <div
+                    className="absolute left-0 top-full z-50 mt-3 min-w-64 rounded-md border border-slate-100 bg-white p-4 shadow-lg"
+                    onMouseLeave={() => setCollectionsOpen(false)}
+                  >
+                    {categories.map((cat) => (
+                      <div key={cat.id} className="mb-3 last:mb-0">
                         <Link
-                          key={child.id}
-                          href={`/collections/${child.slug}`}
-                          className="mt-1.5 block pl-3 text-sm text-[var(--muted)] transition hover:text-[var(--brand)]"
+                          href={`/collections/${cat.slug}`}
+                          className="block font-heading text-base font-bold text-slate-900 transition hover:text-[var(--brand)]"
                           onClick={() => setCollectionsOpen(false)}
                         >
-                          {child.name}
+                          {cat.name}
                         </Link>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
+                        {cat.children.map((child) => (
+                          <Link
+                            key={child.id}
+                            href={`/collections/${child.slug}`}
+                            className="mt-1.5 block pl-3 text-sm text-slate-500 transition hover:text-[var(--brand)]"
+                            onClick={() => setCollectionsOpen(false)}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <Link href="/about" className="nav-link">
+                About
+              </Link>
+              <Link href="/contact" className="nav-link">
+                Contact
+              </Link>
             </div>
-            <Link href="/about" className="nav-link">
-              About
-            </Link>
-            <Link href="/contact" className="nav-link">
-              Contact
-            </Link>
-          </nav>
 
-          <Link href="/" className="brand-mark text-[1.35rem] md:text-2xl">
-            MINA HASAN
-          </Link>
-
-          <div className="flex items-center gap-3">
-            <a
-              href={buildGeneralWhatsAppUrl()}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-secondary hidden !px-4 !py-2.5 sm:inline-flex"
-            >
-              WhatsApp
-            </a>
-            <Link href="/track-order" className="nav-link">
-              Track
-            </Link>
+            <div className="flex items-center space-x-4 sm:space-x-6">
+              <a
+                href={buildGeneralWhatsAppUrl()}
+                target="_blank"
+                rel="noreferrer"
+                className="hidden text-sm font-medium text-slate-400 transition-colors hover:text-slate-900 sm:inline"
+              >
+                WhatsApp
+              </a>
+              <Link
+                href="/track-order"
+                className="text-sm font-medium text-slate-400 transition-colors hover:text-slate-900"
+              >
+                Track
+              </Link>
+              <button
+                type="button"
+                className="p-2 text-slate-400 transition-colors hover:text-slate-900 md:hidden"
+                aria-label="Open menu"
+                onClick={() => setOpen((v) => !v)}
+              >
+                <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path
+                    d="M4 6h16M4 12h16M4 18h16"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {open && (
-        <div className="fixed inset-0 z-50 bg-[var(--background)] lg:hidden">
-          <div className="flex items-center justify-between border-b border-[var(--border)] px-4 py-4">
-            <span className="brand-mark text-lg">MINA HASAN</span>
-            <button
-              type="button"
+        {open && (
+          <div className="absolute left-0 top-full z-50 flex w-full flex-col gap-4 border-b border-slate-100 bg-white p-4 shadow-lg md:hidden">
+            <Link
+              href="/"
               onClick={() => setOpen(false)}
-              aria-label="Close"
-              className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--surface)] text-[var(--muted)]"
+              className="block w-full font-medium text-slate-900 transition-colors hover:text-[var(--brand)]"
             >
-              ✕
-            </button>
-          </div>
-          <div className="space-y-5 p-6">
-            <Link href="/" onClick={() => setOpen(false)} className="nav-link block">
               Home
             </Link>
             <div>
-              <p className="eyebrow mb-3">Collections</p>
+              <p className="mb-2 text-xs font-bold uppercase tracking-wide text-slate-400">
+                Collections
+              </p>
               {categories.map((cat) => (
-                <div key={cat.id} className="mb-3">
+                <div key={cat.id} className="mb-2">
                   <Link
                     href={`/collections/${cat.slug}`}
                     onClick={() => setOpen(false)}
-                    className="block py-1 font-serif text-2xl"
+                    className="block py-1 font-medium text-slate-900"
                   >
                     {cat.name}
                   </Link>
@@ -136,7 +142,7 @@ export function SiteHeader({ categories }: { categories: NavCategory[] }) {
                       key={child.id}
                       href={`/collections/${child.slug}`}
                       onClick={() => setOpen(false)}
-                      className="block py-1 pl-4 text-sm text-[var(--muted)]"
+                      className="block py-1 pl-4 text-sm text-slate-500"
                     >
                       {child.name}
                     </Link>
@@ -144,21 +150,37 @@ export function SiteHeader({ categories }: { categories: NavCategory[] }) {
                 </div>
               ))}
             </div>
-            <Link href="/about" onClick={() => setOpen(false)} className="nav-link block">
-              About Us
+            <Link
+              href="/about"
+              onClick={() => setOpen(false)}
+              className="block w-full font-medium text-slate-500 transition-colors hover:text-[var(--brand)]"
+            >
+              About
             </Link>
-            <Link href="/contact" onClick={() => setOpen(false)} className="nav-link block">
-              Contact Us
+            <Link
+              href="/contact"
+              onClick={() => setOpen(false)}
+              className="block w-full font-medium text-slate-500 transition-colors hover:text-[var(--brand)]"
+            >
+              Contact
             </Link>
-            <Link href="/faqs" onClick={() => setOpen(false)} className="nav-link block">
+            <Link
+              href="/faqs"
+              onClick={() => setOpen(false)}
+              className="block w-full font-medium text-slate-500 transition-colors hover:text-[var(--brand)]"
+            >
               FAQs
             </Link>
-            <Link href="/track-order" onClick={() => setOpen(false)} className="nav-link block">
+            <Link
+              href="/track-order"
+              onClick={() => setOpen(false)}
+              className="block w-full font-medium text-slate-500 transition-colors hover:text-[var(--brand)]"
+            >
               Track Order
             </Link>
           </div>
-        </div>
-      )}
+        )}
+      </nav>
     </header>
   );
 }

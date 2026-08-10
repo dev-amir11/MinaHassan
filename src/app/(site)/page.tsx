@@ -1,87 +1,93 @@
 import Link from "next/link";
+import { CategoryCard } from "@/components/CategoryCard";
 import { ProductCard } from "@/components/ProductCard";
-import { getPublishedProducts } from "@/lib/catalog";
-import { CategoryRow, db } from "@/lib/db";
+import { getCategoryShowcases, getPublishedProducts } from "@/lib/catalog";
 
 export default async function HomePage() {
-  const [featured, newest, categoriesResult] = await Promise.all([
+  const [featured, newest, categories] = await Promise.all([
     getPublishedProducts({ featured: true, take: 8 }),
     getPublishedProducts({ isNew: true, take: 8 }),
-    db()
-      .from("categories")
-      .select("*")
-      .eq("is_visible", true)
-      .is("parent_id", null)
-      .order("sort_order", { ascending: true }),
+    getCategoryShowcases(5),
   ]);
 
-  const categories = (categoriesResult.data || []) as CategoryRow[];
-
   return (
-    <div>
-      <section className="relative flex min-h-[86vh] items-end overflow-hidden bg-[var(--footer)] text-[#f7f2ee]">
-        <div
-          className="absolute inset-0 scale-105 bg-cover bg-center opacity-80"
-          style={{
-            backgroundImage:
-              "url(https://images.unsplash.com/photo-1519741497674-611481863552?w=1800&q=80)",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--footer)] via-[var(--footer)]/45 to-transparent" />
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-20 pt-44">
-          <p className="eyebrow !text-[var(--accent)]">New season · Bridals</p>
-          <h1 className="mt-4 max-w-3xl font-serif text-5xl italic leading-[1.05] text-[#f7f2ee] md:text-7xl lg:text-8xl">
-            Bridals crafted with love
-          </h1>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-[#f7f2ee]/80 md:text-lg">
-            Luxurious occasion wear for Mehndi, Barat, Walima and beyond. Every
-            piece is quote-based — tailored to your celebration.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link href="/collections/events" className="btn-ghost">
-              Explore Bridals
-            </Link>
-            <Link href="/contact" className="btn-light">
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 py-20 md:py-24">
-        <div className="mb-12 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="eyebrow">Collections</p>
-            <h2 className="mt-2 font-serif text-4xl italic md:text-5xl">Shop by Category</h2>
-          </div>
-          <p className="max-w-md text-sm text-[var(--muted)] md:text-right">
-            Events, Formal, Western and Unstitched — curated for every celebration.
-          </p>
-        </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {categories.map((cat) => (
-            <Link
-              key={cat.id}
-              href={`/collections/${cat.slug}`}
-              className="group relative flex min-h-56 items-end overflow-hidden rounded-[var(--radius-xl)] bg-[var(--brand)] p-6 shadow-[var(--shadow-soft)] transition duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--footer)]/85 via-[var(--brand)]/40 to-[var(--accent)]/20 transition duration-500 group-hover:from-[var(--footer)]/90" />
-              <div className="relative text-[#f7f2ee]">
-                <h3 className="font-serif text-3xl italic">{cat.name}</h3>
-                <p className="mt-2 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-[#f7f2ee]/70 transition group-hover:text-[#f7f2ee]">
-                  View collection →
+    <div className="bg-white text-slate-600 antialiased">
+      {/* Hero — Lumina split layout */}
+      <section className="relative overflow-hidden bg-slate-50">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative z-10 bg-slate-50 pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+            <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+              <div className="sm:text-center lg:text-left">
+                <h1 className="font-heading text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl md:text-6xl">
+                  <span className="block xl:inline">Bridals crafted with </span>
+                  <span className="block text-[var(--brand)] xl:inline">love</span>
+                </h1>
+                <p className="mt-3 text-base text-slate-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
+                  Luxurious occasion wear for Mehndi, Barat, Walima and beyond. Every piece is
+                  quote-based — tailored to your celebration.
                 </p>
+                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                  <div className="rounded-md shadow">
+                    <Link
+                      href="/collections/events"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-[var(--brand)] px-8 py-3 text-base font-medium text-white transition-colors hover:bg-[var(--brand-hover)] md:py-4 md:text-lg"
+                    >
+                      Explore Bridals
+                    </Link>
+                  </div>
+                  <div className="mt-3 sm:mt-0 sm:ml-3">
+                    <Link
+                      href="/contact"
+                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-[var(--brand-soft)] px-8 py-3 text-base font-medium text-[var(--brand-hover)] transition-colors hover:bg-[var(--brand-muted)] md:py-4 md:text-lg"
+                    >
+                      Contact Us
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </Link>
-          ))}
+            </main>
+          </div>
+        </div>
+        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:h-full lg:w-full"
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1800&q=80"
+            alt="Bridal fashion"
+          />
         </div>
       </section>
 
-      <section className="section-soft py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-4">
-          <p className="eyebrow">Just arrived</p>
-          <h2 className="mt-2 font-serif text-4xl italic md:text-5xl">New Arrivals</h2>
-          <div className="mt-12 grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+      {/* Shop by Category */}
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="mb-8 font-heading text-2xl font-bold text-slate-900">Shop by Category</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {categories.map((cat) => (
+              <CategoryCard
+                key={cat.id}
+                href={`/collections/${cat.slug}`}
+                name={cat.name}
+                images={cat.images}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* New Arrivals */}
+      <section className="bg-slate-50 py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 flex items-end justify-between">
+            <h2 className="font-heading text-2xl font-bold text-slate-900">New Arrivals</h2>
+            <Link
+              href="/collections/events"
+              className="flex items-center gap-1 font-medium text-[var(--brand)] hover:text-[var(--brand-hover)]"
+            >
+              View all <span>→</span>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {newest.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -89,31 +95,38 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 md:py-24">
-        <p className="eyebrow">Editor&apos;s picks</p>
-        <h2 className="mt-2 font-serif text-4xl italic md:text-5xl">Featured Looks</h2>
-        <div className="mt-12 grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-          {featured.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+      {/* Featured */}
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 flex items-end justify-between">
+            <h2 className="font-heading text-2xl font-bold text-slate-900">Featured Looks</h2>
+          </div>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {featured.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="relative mx-4 mb-10 overflow-hidden rounded-[var(--radius-xl)] bg-[var(--footer)] px-6 py-20 text-center text-[#f7f2ee] md:mx-8 md:py-24">
-        <div className="pointer-events-none absolute -left-20 top-0 h-56 w-56 rounded-full bg-[var(--brand)]/30 blur-3xl" />
-        <div className="pointer-events-none absolute -right-16 bottom-0 h-56 w-56 rounded-full bg-[var(--accent)]/20 blur-3xl" />
-        <p className="eyebrow relative !text-[var(--accent)]">Mina Hasan</p>
-        <h2 className="relative mx-auto mt-4 max-w-2xl font-serif text-4xl italic text-[#f7f2ee] md:text-5xl">
-          We would love to be a part of your special day
-        </h2>
-        <div className="divider-gold relative mx-auto my-7 max-w-40" />
-        <p className="relative mx-auto max-w-xl text-sm text-[var(--footer-muted)] md:text-base">
-          No online prices — every bridal and formal piece begins with a personal
-          quote.
-        </p>
-        <Link href="/contact" className="btn-ghost relative mt-9 inline-flex">
-          Get in touch
-        </Link>
+      {/* Promo band */}
+      <section className="bg-[var(--brand)] py-12">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between px-4 sm:px-6 md:flex-row lg:px-8">
+          <div className="mb-6 text-center md:mb-0 md:text-left">
+            <h2 className="mb-2 font-heading text-2xl font-bold text-white">
+              We would love to be a part of your special day
+            </h2>
+            <p className="text-[var(--brand-soft)]">
+              No online prices — every bridal and formal piece begins with a personal quote.
+            </p>
+          </div>
+          <Link
+            href="/contact"
+            className="rounded-md bg-white px-8 py-3 font-bold text-[var(--brand)] shadow-lg transition-colors hover:bg-slate-100"
+          >
+            Get in touch
+          </Link>
+        </div>
       </section>
     </div>
   );

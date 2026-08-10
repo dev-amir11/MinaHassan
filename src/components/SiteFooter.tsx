@@ -39,95 +39,95 @@ export function SiteFooter() {
   }
 
   return (
-    <footer className="mt-auto overflow-hidden bg-[var(--footer)] text-[#f7f2ee]">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-3 md:py-20">
-        <div>
-          <p className="brand-mark text-2xl text-[#f7f2ee]">MINA HASAN</p>
-          <div className="divider-gold my-6 max-w-28" />
-          <p className="max-w-sm text-sm leading-relaxed text-[var(--footer-muted)]">
-            Luxury bridal and occasion wear, crafted with love. Request a personal
-            quote for every piece.
-          </p>
-          <p className="mt-6 space-y-2 text-sm text-[var(--footer-muted)]">
-            <a href={`tel:${phoneTel}`} className="block transition hover:text-[#f7f2ee]">
-              {phone}
-            </a>
-            <a href={`mailto:${email}`} className="block transition hover:text-[#f7f2ee]">
-              {email}
-            </a>
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 gap-6 text-sm">
-          <div className="space-y-3">
-            <p className="eyebrow !text-[var(--accent)]">Explore</p>
-            {[
-              ["/about", "About Us"],
-              ["/contact", "Contact Us"],
-              ["/faqs", "FAQs"],
-              ["/track-order", "Track Order"],
-            ].map(([href, label]) => (
-              <Link
-                key={href}
-                href={href}
-                className="block text-[var(--footer-muted)] transition hover:text-[#f7f2ee]"
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
-          <div className="space-y-3">
-            <p className="eyebrow !text-[var(--accent)]">Policies</p>
-            {[
-              ["/privacy-policy", "Privacy Policy"],
-              ["/terms-and-conditions", "Terms & Conditions"],
-              ["/return-exchange-policy", "Return/Exchange Policy"],
-              ["/shipping-and-handling", "Shipping & Handling"],
-            ].map(([href, label]) => (
-              <Link
-                key={href}
-                href={href}
-                className="block text-[var(--footer-muted)] transition hover:text-[#f7f2ee]"
-              >
-                {label}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-[var(--radius-lg)] bg-white/5 p-6 backdrop-blur-sm">
-          <h3 className="font-serif text-2xl italic text-[#f7f2ee]">Newsletter</h3>
-          <p className="mt-2 text-sm text-[var(--footer-muted)]">
-            Join our mailing list for latest updates.
-          </p>
-          <form onSubmit={onSubmit} className="mt-5 flex flex-col gap-3 sm:flex-row">
-            <input
-              type="email"
-              required
-              value={emailValue}
-              onChange={(e) => setEmailValue(e.target.value)}
-              placeholder="Email Address"
-              className="w-full rounded-[var(--radius-md)] border border-white/15 bg-white/5 px-4 py-3 text-sm text-[#f7f2ee] outline-none placeholder:text-[var(--footer-muted)] focus:border-[var(--accent)]"
-            />
-            <button
-              type="submit"
-              disabled={status === "loading"}
-              className="rounded-[var(--radius-md)] bg-[var(--brand)] px-5 py-3 text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#fffcfa] transition hover:bg-[var(--brand-hover)] disabled:opacity-50"
-            >
-              {status === "loading" ? "Saving..." : "Subscribe"}
-            </button>
-          </form>
-          {message && (
-            <p
-              className={`mt-3 text-xs ${status === "error" ? "text-red-300" : "text-emerald-300"}`}
-            >
-              {message}
+    <footer className="mt-auto bg-slate-900 py-12 text-slate-300">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
+          <div>
+            <Link href="/" className="mb-4 block font-heading text-2xl font-bold tracking-tight text-white">
+              Mina Hasan
+              <span className="text-[var(--accent)]">.</span>
+            </Link>
+            <p className="text-sm text-slate-400">
+              Luxury bridal and occasion wear, crafted with love. Request a personal quote for
+              every piece.
             </p>
-          )}
+            <p className="mt-4 space-y-1 text-sm text-slate-400">
+              <a href={`tel:${phoneTel}`} className="block transition hover:text-white">
+                {phone}
+              </a>
+              <a href={`mailto:${email}`} className="block transition hover:text-white">
+                {email}
+              </a>
+            </p>
+          </div>
+
+          <div>
+            <h4 className="mb-4 font-bold text-white">Explore</h4>
+            <ul className="space-y-2 text-sm">
+              {[
+                ["/about", "About Us"],
+                ["/contact", "Contact Us"],
+                ["/faqs", "FAQs"],
+                ["/track-order", "Track Order"],
+              ].map(([href, label]) => (
+                <li key={href}>
+                  <Link href={href} className="transition-colors hover:text-white">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 font-bold text-white">Policies</h4>
+            <ul className="space-y-2 text-sm">
+              {[
+                ["/privacy-policy", "Privacy Policy"],
+                ["/terms-and-conditions", "Terms & Conditions"],
+                ["/return-exchange-policy", "Return/Exchange Policy"],
+                ["/shipping-and-handling", "Shipping & Handling"],
+              ].map(([href, label]) => (
+                <li key={href}>
+                  <Link href={href} className="transition-colors hover:text-white">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 font-bold text-white">Stay in the loop</h4>
+            <form onSubmit={onSubmit} className="flex gap-2">
+              <input
+                type="email"
+                required
+                value={emailValue}
+                onChange={(e) => setEmailValue(e.target.value)}
+                placeholder="Enter your email"
+                className="w-full rounded-md border-none bg-slate-800 px-4 py-2 text-sm text-white outline-none placeholder:text-slate-500 focus:ring-2 focus:ring-[var(--brand)]"
+              />
+              <button
+                type="submit"
+                disabled={status === "loading"}
+                className="rounded-md bg-[var(--brand)] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[var(--brand-hover)] disabled:opacity-50"
+              >
+                {status === "loading" ? "..." : "Subscribe"}
+              </button>
+            </form>
+            {message && (
+              <p
+                className={`mt-3 text-xs ${status === "error" ? "text-red-300" : "text-emerald-300"}`}
+              >
+                {message}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="border-t border-white/8 px-4 py-5 text-center text-xs text-[var(--footer-muted)]">
-        Copyright © {new Date().getFullYear()} Mina Hasan. All rights reserved.
+        <div className="border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
+          © {new Date().getFullYear()} Mina Hasan. All rights reserved.
+        </div>
       </div>
     </footer>
   );

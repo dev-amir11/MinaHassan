@@ -62,11 +62,10 @@ export default async function ProductPage({ params }: Props) {
     <div>
       <ProductDetails product={product} />
       {related.length > 0 && (
-        <section className="border-t border-[var(--border)] section-soft py-14">
-          <div className="mx-auto max-w-7xl px-4">
-            <p className="eyebrow">Continue browsing</p>
-            <h2 className="mt-2 font-serif text-3xl">You May Also Like</h2>
-            <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="border-t border-slate-100 bg-slate-50 py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="font-heading text-2xl font-bold text-slate-900">You May Also Like</h2>
+            <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {related.map((item) => (
                 <ProductCard key={item.id} product={item} />
               ))}

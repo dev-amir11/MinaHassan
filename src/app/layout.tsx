@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Plus_Jakarta_Sans } from "next/font/google";
+import { Outfit } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import "./globals.css";
 
-const display = Bodoni_Moda({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
-
-const sans = Plus_Jakarta_Sans({
+const outfit = Outfit({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const outfitHeading = Outfit({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -30,9 +29,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${display.variable} ${sans.variable} h-full`}
+      className={`${outfit.variable} ${outfitHeading.variable} h-full`}
     >
-      <body className="min-h-full font-sans antialiased text-foreground">
+      <body className="min-h-full font-sans antialiased text-foreground bg-white">
         <Providers>{children}</Providers>
       </body>
     </html>

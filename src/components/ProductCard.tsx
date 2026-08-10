@@ -25,34 +25,36 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <>
       <article className="group">
-        <div className="product-media relative aspect-[3/4] transition duration-500 group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-lift)]">
+        <div className="product-media relative aspect-[3/4]">
           <Link href={`/products/${product.slug}`} className="block h-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={image}
               alt={product.name}
-              className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+              className="h-full w-full object-cover object-center transition-opacity group-hover:opacity-75"
             />
           </Link>
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="absolute bottom-4 left-4 right-4 translate-y-3 rounded-[var(--radius-md)] bg-[rgba(255,252,250,0.92)] px-4 py-3 text-center text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[var(--brand)] opacity-0 shadow-[var(--shadow-soft)] backdrop-blur-md transition duration-400 group-hover:translate-y-0 group-hover:opacity-100"
+            className="absolute bottom-3 left-3 right-3 rounded-md bg-slate-900 py-2 text-sm font-medium text-white transition-all duration-300 hover:bg-slate-800 sm:translate-y-2 sm:opacity-0 sm:group-hover:translate-y-0 sm:group-hover:opacity-100"
           >
             Get Quote
           </button>
         </div>
-        <div className="mt-5 space-y-1.5 px-1">
-          {categoryName && <p className="eyebrow !text-[var(--muted)]">{categoryName}</p>}
+        <div className="mt-4">
+          {categoryName && (
+            <p className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-400">
+              {categoryName}
+            </p>
+          )}
           <Link href={`/products/${product.slug}`}>
-            <h3 className="font-serif text-[1.65rem] tracking-[-0.02em] text-[var(--foreground)] transition group-hover:text-[var(--brand)]">
+            <h3 className="text-sm font-medium text-slate-700 transition group-hover:text-[var(--brand)]">
               {product.name}
             </h3>
           </Link>
           {product.shortDescription && (
-            <p className="line-clamp-2 text-sm leading-relaxed text-[var(--muted)]">
-              {product.shortDescription}
-            </p>
+            <p className="mt-1 line-clamp-2 text-sm text-slate-500">{product.shortDescription}</p>
           )}
         </div>
       </article>

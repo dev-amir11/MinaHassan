@@ -7,6 +7,8 @@ type QuoteWhatsAppPayload = {
   eventDate?: string | null;
   occasion?: string | null;
   sizeNote?: string | null;
+  selectedColor?: string | null;
+  selectedSize?: string | null;
   message?: string | null;
   productName?: string | null;
   productSlug?: string | null;
@@ -41,6 +43,8 @@ export function buildQuoteWhatsAppUrl(data: QuoteWhatsAppPayload) {
       lines.push(`Product link: /products/${data.productSlug}`);
     }
   }
+  if (data.selectedColor) lines.push(`Color: ${data.selectedColor}`);
+  if (data.selectedSize) lines.push(`Size: ${data.selectedSize}`);
   if (data.sizeNote) lines.push(`Size notes: ${data.sizeNote}`);
   if (data.message) lines.push(`Message: ${data.message}`);
 

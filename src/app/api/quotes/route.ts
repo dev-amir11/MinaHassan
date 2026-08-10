@@ -12,6 +12,8 @@ const schema = z.object({
   eventDate: z.string().optional(),
   occasion: z.string().optional(),
   sizeNote: z.string().optional(),
+  selectedColor: z.string().optional(),
+  selectedSize: z.string().optional(),
   message: z.string().optional(),
   productId: z.string().optional(),
   productName: z.string().optional(),
@@ -23,6 +25,14 @@ export async function POST(req: Request) {
     const body = await req.json();
     const data = schema.parse(body);
 
+    const sizeNote = [
+      data.selectedColor ? `Color: ${data.selectedColor}` : "",
+      data.selectedSize ? `Size: ${data.selectedSize}` : "",
+      data.sizeNote || "",
+    ]
+      .filter(Boolean)
+      .join(" | ");
+
     const { data: quote, error } = await db()
       .from("quote_requests")
       .insert({
@@ -33,7 +43,7 @@ export async function POST(req: Request) {
         city: data.city || null,
         event_date: data.eventDate || null,
         occasion: data.occasion || null,
-        size_note: data.sizeNote || null,
+        size_note: sizeNote || null,
         message: data.message || null,
         product_id: data.productId || null,
         product_name: data.productName || null,
@@ -54,6 +64,8 @@ export async function POST(req: Request) {
       eventDate: data.eventDate,
       occasion: data.occasion,
       sizeNote: data.sizeNote,
+      selectedColor: data.selectedColor,
+      selectedSize: data.selectedSize,
       message: data.message,
       productName: data.productName,
       productSlug: data.productSlug,

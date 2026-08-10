@@ -1,4 +1,72 @@
-import { CategoryRow, db, ProductRow, toProductView } from "@/lib/db";
+import { asImageArray, CategoryRow, db, ProductRow, toProductView } from "@/lib/db";
+
+export type CategoryShowcase = {
+  id: string;
+  name: string;
+  slug: string;
+  images: string[];
+};
+
+/** Top-level categories with product image slides for home cards. */
+export async function getCategoryShowcases(limitImages = 5): Promise<CategoryShowcase[]> {
+  const { data: parents, error } = await db()
+    .from("categories")
+    .select("*")
+    .eq("is_visible", true)
+    .is("parent_id", null)
+    .order("sort_order", { ascending: true });
+
+  if (error) throw error;
+
+  const result: CategoryShowcase[] = [];
+
+  for (const parent of (parents || []) as CategoryRow[]) {
+    const { data: children } = await db()
+      .from("categories")
+      .select("id")
+      .eq("is_visible", true)
+      .eq("parent_id", parent.id);
+
+    const categoryIds = [parent.id, ...((children || []) as { id: string }[]).map((c) => c.id)];
+
+    const images: string[] = [];
+    if (parent.image_url) images.push(parent.image_url);
+
+    const { data: links } = await db()
+      .from("product_categories")
+      .select("product_id")
+      .in("category_id", categoryIds)
+      .limit(24);
+
+    const productIds = [...new Set((links || []).map((l) => l.product_id as string))];
+
+    if (productIds.length) {
+      const { data: products } = await db()
+        .from("products")
+        .select("images")
+        .eq("is_published", true)
+        .in("id", productIds)
+        .order("is_featured", { ascending: false })
+        .order("updated_at", { ascending: false })
+        .limit(12);
+
+      for (const product of (products || []) as Pick<ProductRow, "images">[]) {
+        const first = asImageArray(product.images)[0];
+        if (first && !images.includes(first)) images.push(first);
+        if (images.length >= limitImages) break;
+      }
+    }
+
+    result.push({
+      id: parent.id,
+      name: parent.name,
+      slug: parent.slug,
+      images: images.slice(0, limitImages),
+    });
+  }
+
+  return result;
+}
 
 export async function getNavCategories() {
   const { data: parents, error } = await db()
