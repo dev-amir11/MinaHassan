@@ -99,7 +99,7 @@ export function asImageArray(images: ProductRow["images"]): string[] {
 /** Shape used by existing ProductCard / ProductDetails components */
 export function toProductView(
   product: ProductRow,
-  categories: { category: { id?: string; name: string; slug?: string } }[] = []
+  categories: { category: { id?: string; name: string; slug: string } }[] = []
 ) {
   return {
     id: product.id,
