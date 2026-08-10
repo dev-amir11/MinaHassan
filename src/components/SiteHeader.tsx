@@ -25,7 +25,7 @@ export function SiteHeader({ categories }: { categories: NavCategory[] }) {
           <div className="flex h-16 items-center justify-between">
             <div className="flex flex-shrink-0 items-center">
               <Link href="/" className="brand-mark text-2xl tracking-tight text-slate-900">
-                Mina Hasan
+                Saira Virk
                 <span className="text-[var(--brand)]">.</span>
               </Link>
             </div>

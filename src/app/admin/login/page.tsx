@@ -46,13 +46,13 @@ export default function AdminLoginPage() {
         className="w-full max-w-md space-y-4 rounded-2xl border border-black/10 bg-white p-8 shadow-sm"
       >
         <p className="text-xs uppercase tracking-[0.3em] text-neutral-500">Admin</p>
-        <h1 className="font-serif text-3xl italic">Mina Hasan</h1>
+        <h1 className="font-serif text-3xl italic">Saira Virk</h1>
         <input
           name="email"
           type="email"
           required
           placeholder="Email"
-          defaultValue="admin@minahasan.com"
+          defaultValue="admin@sairavirk.com"
           className="w-full rounded-xl border border-black/20 px-3 py-2.5 text-sm"
         />
         <input

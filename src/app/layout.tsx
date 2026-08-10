@@ -17,11 +17,11 @@ const outfitHeading = Outfit({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mina Hasan — Luxury Bridal & Designer Wear",
-    template: "%s — Mina Hasan",
+    default: "Saira Virk — Luxury Bridal & Designer Wear",
+    template: "%s — Saira Virk",
   },
   description:
-    "Luxury bridal and occasion wear by Mina Hasan. Request a personal quote for every piece.",
+    "Luxury bridal and occasion wear by Saira Virk. Request a personal quote for every piece.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

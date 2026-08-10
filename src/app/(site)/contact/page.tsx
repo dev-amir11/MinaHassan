@@ -6,7 +6,7 @@ import { useToast } from "@/components/ToastProvider";
 import { buildGeneralWhatsAppUrl } from "@/lib/whatsapp";
 
 const phone = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+92 307 447 4467";
-const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@minahasan.com";
+const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@sairavirk.com";
 
 export default function ContactPage() {
   const { success, error: toastError } = useToast();

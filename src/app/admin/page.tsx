@@ -32,7 +32,7 @@ export default async function AdminDashboard() {
   return (
     <div>
       <h1 className="font-serif text-3xl">Dashboard</h1>
-      <p className="mt-2 text-sm text-neutral-600">Manage Mina Hasan catalog and leads.</p>
+      <p className="mt-2 text-sm text-neutral-600">Manage Saira Virk catalog and leads.</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
           <Link

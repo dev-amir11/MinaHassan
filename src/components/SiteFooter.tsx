@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 import { useToast } from "@/components/ToastProvider";
 
 const phone = process.env.NEXT_PUBLIC_CONTACT_PHONE || "+92 307 447 4467";
-const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@minahasan.com";
+const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@sairavirk.com";
 const phoneTel = phone.replace(/[^\d+]/g, "");
 
 export function SiteFooter() {
@@ -44,7 +44,7 @@ export function SiteFooter() {
         <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
             <Link href="/" className="mb-4 block font-heading text-2xl font-bold tracking-tight text-white">
-              Mina Hasan
+              Saira Virk
               <span className="text-[var(--accent)]">.</span>
             </Link>
             <p className="text-sm text-slate-400">
@@ -126,7 +126,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div className="border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
-          © {new Date().getFullYear()} Mina Hasan. All rights reserved.
+          © {new Date().getFullYear()} Saira Virk. All rights reserved.
         </div>
       </div>
     </footer>

@@ -61,7 +61,7 @@ async function upsertCategory(row: {
 }
 
 async function main() {
-  const email = (process.env.ADMIN_EMAIL || "admin@minahasan.com").toLowerCase();
+  const email = (process.env.ADMIN_EMAIL || "admin@sairavirk.com").toLowerCase();
   const password = process.env.ADMIN_PASSWORD || "admin123";
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -127,7 +127,7 @@ async function main() {
       short_description:
         "A breathtaking bridal design marrying contemporary style with traditional elegance.",
       description:
-        "This breathtaking Mina Hasan bridal design masterfully marries contemporary style with traditional elegance.",
+        "This breathtaking Saira Virk bridal design masterfully marries contemporary style with traditional elegance.",
       fabrics: "Shirt: Silk Net\nLehenga: Raw Silk\nDupatta: Silk Net",
       delivery_timeline: "Made-to-order. Typical production timeline is 8–12 weeks.",
       disclaimer: "Colors may vary from one device to another.",
@@ -142,7 +142,7 @@ async function main() {
       name: "Golnar",
       slug: "golnar",
       short_description: "A vibrant mehndi ensemble celebrating color and craftsmanship.",
-      description: "This exquisite Mina Hasan mehndi ensemble is a celebration of vibrant color.",
+      description: "This exquisite Saira Virk mehndi ensemble is a celebration of vibrant color.",
       fabrics: "Shirt: Organza\nLehenga: Raw Silk\nDupatta: Net",
       delivery_timeline: "Made-to-order. Typical production timeline is 6–10 weeks.",
       disclaimer: "Handmade details may vary slightly.",
@@ -212,12 +212,12 @@ async function main() {
   const { data: existingOrder } = await supabase
     .from("track_orders")
     .select("id")
-    .eq("order_number", "MH-1001")
+    .eq("order_number", "SV-1001")
     .maybeSingle();
 
   if (!existingOrder) {
     const { error } = await supabase.from("track_orders").insert({
-      order_number: "MH-1001",
+      order_number: "SV-1001",
       customer_name: "Sample Customer",
       customer_email: "bride@example.com",
       customer_phone: "+92 300 0000000",

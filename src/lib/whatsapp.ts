@@ -24,7 +24,7 @@ export function getWhatsAppNumber() {
 
 export function buildQuoteWhatsAppUrl(data: QuoteWhatsAppPayload) {
   const lines = [
-    "Hello Mina Hasan,",
+    "Hello Saira Virk,",
     "I would like to request a quote.",
     "",
     `Name: ${data.fullName}`,
@@ -54,7 +54,7 @@ export function buildQuoteWhatsAppUrl(data: QuoteWhatsAppPayload) {
 
 export function buildGeneralWhatsAppUrl(message?: string) {
   const text = encodeURIComponent(
-    message || "Hello, I have a query regarding Mina Hasan."
+    message || "Hello, I have a query regarding Saira Virk."
   );
   return `https://wa.me/${getWhatsAppNumber()}?text=${text}`;
 }

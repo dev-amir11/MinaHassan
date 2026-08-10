@@ -21,7 +21,7 @@ export async function middleware(req: NextRequest) {
 
   try {
     const secret = new TextEncoder().encode(
-      process.env.AUTH_SECRET || "mina-hasan-dev-secret-change-in-production"
+      process.env.AUTH_SECRET || "saira-virk-dev-secret-change-in-production"
     );
     await jwtVerify(token, secret);
     return NextResponse.next();

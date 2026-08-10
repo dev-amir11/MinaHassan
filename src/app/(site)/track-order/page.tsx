@@ -68,7 +68,7 @@ export default function TrackOrderPage() {
             value={orderNumber}
             onChange={(e) => setOrderNumber(e.target.value)}
             required
-            placeholder="e.g. MH-1001"
+            placeholder="e.g. SV-1001"
             className="input-field"
           />
           <button type="submit" disabled={loading} className="btn-primary !px-5">

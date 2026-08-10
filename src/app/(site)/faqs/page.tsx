@@ -2,8 +2,8 @@ export const metadata = { title: "FAQs" };
 
 const faqs = [
   {
-    q: "Where is Mina Hasan based?",
-    a: "Founded in 2002, Mina Hasan is based in Pakistan and ships worldwide.",
+    q: "Where is Saira Virk based?",
+    a: "Saira Virk is based in Pakistan and ships worldwide.",
   },
   {
     q: "How do I get a quote?",

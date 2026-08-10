@@ -7,9 +7,9 @@ export default function Page() {
     <InfoPage
       title="Privacy Policy"
       paragraphs={[
-        "Mina Hasan respects your privacy. Information collected through quote forms, contact forms, and newsletter signups is used only to respond to your inquiries and improve our services.",
+        "Saira Virk respects your privacy. Information collected through quote forms, contact forms, and newsletter signups is used only to respond to your inquiries and improve our services.",
         "We do not sell your personal data. Contact details may be shared with our internal sales and production teams to fulfill quote and order requests.",
-        "For privacy questions, email info@minahasan.com or WhatsApp +92 324 341 7213.",
+        "For privacy questions, email info@sairavirk.com or WhatsApp +92 324 341 7213.",
       ]}
     />
   );
